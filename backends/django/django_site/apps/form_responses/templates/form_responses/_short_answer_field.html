@@ -1,0 +1,19 @@
+{% load form_responses_tags %}
+
+{% if field.details.question %}
+<div class="question">{{ field.details.question|markdown }}</div>
+{% endif %}
+
+<label{% if response.errors %} class="error"{% endif %}>
+  {{ field.details.label }}
+  <input type="text" name="responses[{{ field.id }}][answer]" value="{{ response.details.answer }}">
+</label>
+{% if response.errors %}
+  <small class="error">
+    <ul>
+    {% for error in response.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  </small>
+{% endif %}

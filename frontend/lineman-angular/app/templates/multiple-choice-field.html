@@ -1,0 +1,7 @@
+<div class="question" ng-if="field.details.question" ng-bind-html="md2html(field.details.question)"></div>
+<ul class="choices">
+  <li class="choice" ng-repeat="choice in field.details.choices" ng-init="val = field.response.answers[$index].selected">
+    <input type="checkbox" ng-value="choice.label" ng-model="val" ng-change="val = field.response.answers[$index].selected">
+    <label>{{ choice.label }}</label>
+  </li>
+</ul>

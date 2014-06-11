@@ -1,0 +1,88 @@
+<div id="admin-form-editor" class="admin-page-content">
+
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">
+        <span ng-if="newForm || newFormFromCopy">New Form</span>
+        <span ng-if="newVersionFromCopy">New Form Version</span>
+        <span ng-if="!(newForm || newFormFromCopy || newVersionFromCopy)">Edit Form</span>
+      </h4>
+
+      <form name="formSettings">
+        <li class="heading">Actions</li>
+        <li class="inline-links">
+          <a ng-click="save()" ng-if="dirty && formSettings.$valid">Save</a>
+          <span ng-if="!dirty || formSettings.$invalid">Save</span>
+        </li>
+        <li><a ng-click="tryDone()">Done</a></li>
+
+        <li class="heading">Add Field</li>
+        <li class="inline-links">
+          <a ng-click="addField('info')">Info</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a ng-click="addField('address')">Address</a>
+        </li>
+        <li class="inline-links">
+          <a ng-click="addField('short-answer')">Short Answer</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a ng-click="addField('long-answer')">Long Answer</a>
+        </li>
+        <li class="inline-links">
+          <a ng-click="addField('single-choice')">Single Choice</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a ng-click="addField('multiple-choice')">Multiple Choice</a>
+        </li>
+
+        <li class="heading" ng-if="editingSettings">Form Settings</li>
+        <li ng-if="editingSettings">
+          <label id="form-name-editor" ng-class="{error: formSettings.name.$invalid}">Form Name
+            <input type="text" name="name" ng-model="form.name" placeholder="Enter a form name" required>
+          </label>
+          <label id="form-project-editor">Project
+            <select id="form-project-select" name="project" ng-model="form.project" ng-options="k as v for (k, v) in projects"></select>
+          </label>
+          <label id="form-description-editor">Description
+            <textarea name="description" ng-model="form.description" placeholder="Add a form description"></textarea>
+          </label>
+        </li>
+      </form>
+
+      <div ng-if="editingField" class="field-editor {{ editingField.kind }}-field-editor" ng-include="editingField.kind + '-field-editor.html'"></div>
+    </ul>
+  </div>
+
+  <div class="content" ng-click="blurEditing()">
+
+    <div class="form-info" ng-class="{editing: editingSettings}" ng-click="editSettings($event)">
+      <h2><span ng-class="{'no-form-name': !form.name}" ng-bind="formLoaded ? (form.name || '-Form Name Required-') : '&nbsp;'"></span></h2>
+      <ul ng-if="newForm || newFormFromCopy || newVersionFromCopy">
+        <li><span class="form-info-data"><i class="fi-page-add"></i> New Form</span></li>
+      </ul>
+      <ul ng-if="!(newForm || newFormFromCopy || newVersionFromCopy)">
+        <li><span class="form-info-data">Version {{ form.version }}</span><span class="form-info-data" ng-if="form.current"> (current)</span> in <span class="form-info-data">{{ projects[form.project] }}</span>, last saved on <span class="form-info-data">{{ form.date | date:"medium" }}</span> by <span class="form-info-data">{{ form.username }}</span></li>
+        <li class="form-unpublished" ng-if="!form.published"><i class="fi-x"></i> Unpublished</li>
+        <li class="form-published" ng-if="form.published"><i class="fi-check"></i> Published <span class="published-url">Location: <a>{{ protocol() }}://{{ host() }}{{ port() != '80' ? ':' + port() : '' }}/forms/{{ form.project }}/{{ form.slug }}</a></span></li>
+        <li class="form-locked" ng-if="form.locked"><i class="fi-lock"></i> Locked</li>
+      </ul>
+    </div>
+
+    <form action="" class="form-preview">
+      <div class="row field {{ field.kind }}-field" ng-class="{editing: editingField == field}" ng-click="editField($index, $event)" ng-repeat="field in form.fields">
+        <div class="small-12 columns" ng-include="field.kind + '-field.html'"></div>
+      </div>
+    </form>
+  </div>
+
+  <div id="unsaved-warning" class="reveal-modal medium" ng-show="displayWarning">
+    <h2>Unsaved Changes in Form</h2>
+    <p>You have made some changes to the form that have not been saved yet. Are you sure you want to close the form editor and discard the unsaved changes?</p>
+    <ul class="button-group even-2">
+      <li><a class="button alert" ng-click="done()">Yes, discard any changes since the last save and exit the editor.</a></li>
+      <li><a class="button secondary" ng-click="displayWarning = false">No, go back to the editor so that I can save my work.</a></li>
+    </ul>
+    <a class="close-reveal-modal" ng-click="displayWarning = false">&#215;</a>
+  </div>
+  <div class="reveal-modal-bg" ng-show="displayWarning" ng-click="displayWarning = false"></div>
+
+</div>
+

@@ -1,0 +1,17 @@
+<div class="field-controls" ng-include="'field-controls.html'"></div>
+<li class="heading">Single Choice Field</li>
+<div ng-controller="ChoiceFieldController">
+  <label class="required-option"><input name="required" type="checkbox" ng-model="editingField.details.required"> Required?</label>
+  <label>Question Text</label>
+  <textarea name="question" ng-model="editingField.details.question" placeholder="Enter question text"></textarea>
+  <label>Choices</label>
+  <div class="choice-label row collapse" ng-repeat="choice in editingField.details.choices">
+    <div ng-form="choiceBuilder" class="small-11 columns">
+      <input type="text" name="choice" ng-model="choice.label" ng-class="{error: choiceBuilder.$invalid}" required placeholder="Enter choice label">
+    </div>
+    <div class="small-1 columns">
+      <a class="button alert radius postfix remove-choice" ng-click="removeChoice($index)">-</a>
+    </div>
+  </div>
+  <a class="button tiny success radius add-choice" ng-click="addChoice()">Add Choice</a>
+</div>

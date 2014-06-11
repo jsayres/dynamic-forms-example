@@ -1,0 +1,29 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+<h1>Log In</h1>
+
+<div class="row">
+  <div class="large-6 columns last">
+    <form action="" method="post">
+    {% csrf_token %}
+
+    <div>
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+
+    <div>
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+
+    <div>
+      <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url 'main' %}{% endif %}" />
+      <input type="submit" value="login" class="small button" />
+    </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

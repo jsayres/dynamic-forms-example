@@ -1,0 +1,22 @@
+{% load form_responses_tags %}
+
+{% if field.details.question %}
+<div class="question">{{ field.details.question|markdown }}</div>
+{% endif %}
+
+<ul class="choices {% if errors %} error{% endif %}">
+  {% for choice in field.details.choices %}
+  <li class="choice"><label><input type="radio" name="responses[{{ field.id }}][answer]" value="{{ choice.label }}"{% if response.details.answer == choice.label %} checked{% endif %}> {{ choice.label }}</label></li>
+  {% endfor %}
+</ul>
+{% if errors %}
+  <small class="error">
+    <ul>
+    {% for name, msgs in errors.message_dict.items %}
+    {% for msg in msgs %}
+    <li>{{ name|add:' '|add:msg|capfirst }}</li>
+    {% endfor %}
+    {% endfor %}
+    </ul>
+  </small>
+{% endif %}

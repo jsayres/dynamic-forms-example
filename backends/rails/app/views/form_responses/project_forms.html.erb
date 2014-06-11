@@ -1,0 +1,28 @@
+<div id="project-forms">
+    <h1>Available Forms</h1>
+
+    <% if @forms.empty? %>
+    <p class="no-forms">There are no forms available to fill out at this time.</p>
+    <% else %>
+    <div class="row">
+        <div class="large-6 columns last">
+            <table id="project-forms-table">
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @forms.each do |form| %>
+                    <tr>
+                        <td><%= link_to form.name.titleize, new_form_response_path(form.project, form.slug) %></td>
+                        <td><% if form.description.present? %><%= form.description %><% else %><em>No description provided.</em><% end %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <% end %>
+</div>

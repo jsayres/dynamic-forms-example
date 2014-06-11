@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Sub-Project" %></title>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/app.css" media="all" />
+    <%= stylesheet_link_tag "css/sub" %>
+    <%= yield :css %>
+
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div class="top-bar contain-to-grid">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="/subproject">My Website | Sub-Project</a></h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <ul class="right">
+            <li><%= link_to "My Website Home", root_path %></li>
+            <% if logged_in? && (current_user.staff || current_user.admin) %>
+            <li class="divider"></li>
+            <li><%= link_to "Admin", admin_path %></li>
+            <% end %>
+            <li class="divider"></li>
+            <li>
+              <% if logged_in? %>
+              <%= link_to "Log Out", logout_path, method: :delete %>
+              <% else %>
+              <%= link_to "Log In", login_path %>
+              <% end %>
+            </li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        <% flash.reject { |k, v| k == 'done' }.each do |key, value| %>
+        <div class="alert-box <%= key %>"><%= value %></div>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
+    </div>
+
+  </body>
+</html>
+

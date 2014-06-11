@@ -1,0 +1,50 @@
+<div id="admin-form-versions" class="admin-page-content">
+
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">Form Versions</h4>
+      <li class="heading">Navigation</li>
+      <li><a href="/admin/forms">Forms Home</a></li>
+      <li><a href="/admin/forms/{{ currentVersion.number }}/versions/{{ currentVersion.version }}">Current Version of This Form</a></li>
+
+      <li class="heading">Actions</li>
+      <li><a href="/admin/forms/new">Create a New Form</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <h2>Versions of {{ currentVersion.name }}</h2>
+
+    <div ng-if="versionsLoaded">
+      <table id="form-versions-list">
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Author</th>
+            <th>Last Modified</th>
+            <th>Published?</th>
+            <th>Responses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="version in versions">
+            <td><a href="/admin/forms/{{ version.number }}/versions/{{ version.version }}">{{ version.version }}</a></td>
+            <td>{{ version.name }}</td>
+            <td>{{ projects[version.project] }}</td>
+            <td>{{ version.username }}</td>
+            <td>{{ version.date | date:"medium" }}</td>
+            <td class="check"><i class="fi-check" ng-if="version.published"></i></td>
+            <td>
+              <span ng-if="version.numResponses == 0">{{ version.numResponses }}</span>
+              <a class="form-responses" href="/admin/forms/{{ version.number }}/versions/{{ version.version}}/responses" ng-if="version.numResponses > 0">{{ version.numResponses }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

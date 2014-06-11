@@ -1,0 +1,14 @@
+.DS_Store
+*.swp
+
+/frontend/lineman-angular/node_modules
+/frontend/lineman-angular/dist
+/frontend/lineman-angular/generated
+/frontend/lineman-angular/vendor/bower
+/frontend/lineman-angular/.sass-cache
+
+/backends/django/*.pyc
+
+/backends/rails/.bundle
+/backends/rails/log/*.log
+/backends/rails/tmp

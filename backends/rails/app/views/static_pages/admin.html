@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="admin" ng-controller="AdminController">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/app.css" media="all" />
+  </head>
+
+  <body>
+    <div class="top-bar">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1>
+              <a href="/admin">
+                Admin
+              </a>
+            </h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="divider"></li>
+            <li><a ng-click="logout()">Log Out</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <div id="view" ng-view></div>
+
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+  </body>
+
+</html>

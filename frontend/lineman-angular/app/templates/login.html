@@ -1,0 +1,19 @@
+<div id="login-form">
+  <h1>Log In</h1>
+
+  <div class="row">
+    <div class="small-7 large-5 columns small-centered">
+      <form ng-submit="login()">
+        <label for="username">
+          <input type="text" id="username" name="username" placeholder="Username" ng-model="credentials.username" required/>
+        </label>
+
+        <label for="password">
+          <input type="text" id="password" name="password" placeholder="Password" ng-model="credentials.password" required/>
+        </label>
+
+        <input type="submit" class="button small">
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+div.top-bar {
+  background-color: #00698b;
+  margin-bottom: 1.25rem;
+}
+
+nav.top-bar {
+  background-color: #00698b;
+}
+
+nav.top-bar li.divider {
+  border-right: solid 1px #008dbc;
+}
+
+nav.top-bar section.top-bar-section ul.right li a {
+  background-color: #00698b;
+}
+
+nav.top-bar section.top-bar-section ul.right li a:hover {
+  background-color: #00597b;
+}
+
+#project-forms #project-forms-table {
+  width: 100%;
+}
+
+#landing-page .heading {
+  background-color: #00698b;
+  height: 9.375rem;
+  margin-bottom: 1.25rem;
+}
+
+#landing-page .heading h1 {
+  color: #fff;
+  font-size: 3.75rem;
+  line-height: 9.375rem;
+  margin: 0;
+}

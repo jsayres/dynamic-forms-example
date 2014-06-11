@@ -1,0 +1,25 @@
+div.top-bar {
+  background-color: #3c9b5f;
+  margin-bottom: 1.25rem;
+}
+
+nav.top-bar {
+  background-color: #3c9b5f;
+}
+
+nav.top-bar li.divider {
+  border-right: solid 1px #47b670;
+}
+
+nav.top-bar section.top-bar-section ul.right li a {
+  background-color: #3c9b5f;
+}
+
+nav.top-bar section.top-bar-section ul.right li a:hover {
+  background-color: #2c8b4f;
+}
+
+#project-forms #project-forms-table {
+  width: 100%;
+}
+

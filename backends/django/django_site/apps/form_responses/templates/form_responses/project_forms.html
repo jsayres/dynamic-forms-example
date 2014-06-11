@@ -1,0 +1,34 @@
+{% extends layout %}
+
+{% block title %}Available Forms{% endblock %}
+
+{% block content %}
+<div id="project-forms">
+    <h1>Available Forms</h1>
+
+    {% if not forms %}
+    <p class="no-forms">There are no forms available to fill out at this time.</p>
+    {% else %}
+    <div class="row">
+        <div class="large-6 columns last">
+            <table id="project-forms-table">
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in forms %}
+                    <tr>
+                      <td><a href="{% url 'fill_out_form' form.project form.slug %}">{{ form.name|title }}</a></td>
+                      <td>{% if form.description %}{{ form.description }}{% else %}<em>No description provided.</em>{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<% provide(:title, 'Fill Out Form') %>
+
+<div id="form-new-response">
+
+  <%= form_tag do %>
+
+  <% @form.fields.each do |field| %>
+  <div class="row field <%= field.kind %>-field">
+    <div class="small-8 columns last">
+      <%= render partial: "#{field.kind.underscore}_field", locals: {field: field, response: @field_responses[field.id]} %>
+    </div>
+  </div>
+  <% end %>
+  <input type="submit" name="submit" value="Submit" class="button primary small">
+
+  <% end %>
+
+</div>

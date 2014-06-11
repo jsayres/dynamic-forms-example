@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Website</title>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/app.css" media="all" />
+    <%= stylesheet_link_tag "css/main" %>
+    <%= yield :css %>
+
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div id="landing-page">
+
+      <div class="heading">
+        <div class="row">
+          <div class="large-12 columns">
+            <h1>My Website</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <h2>This Is a Sample Website</h2>
+          <p>There isn't much to do just yet, but you can fill out some <%= link_to 'forms', project_forms_path(:main) %>.</p>
+          <p>Alternatively, you can check out a <%= link_to 'sub-project', '/subproject' %>.</p>
+          <p>And if you're an administrator, you can create, edit, and publish forms of your own in the <%= link_to 'forms admin area', '/admin/forms' %>.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

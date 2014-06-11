@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: admin
+
+development:
+  <<: *default
+  database: rails_site-dev
+
+test:
+  <<: *default
+  database: rails_site-test
+
+staging:
+  <<: *default
+  database: rails_site-stag
+
+production:
+  <<: *default
+  database: rails_site-prod

@@ -1,0 +1,41 @@
+<div id="admin-form-response" class="admin-page-content" class="row">
+
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">View Response</h4>
+      <li class="heading">Navigation</li>
+      <li ng-if="form"><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}">Form View &amp; Options</a></li>
+      <li ng-if="form"><a href="/admin/forms">Forms Home</a></li>
+
+      <li class="heading">Responses</li>
+      <li id="response-navigation" class="inline-links">
+        <a class="prev-link" ng-if="isPrevResponse()" href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/responses/{{ prevResponse() }}">Previous</a>
+        <span ng-if="!isPrevResponse()">Previous</span>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="responses-link" href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/responses">All</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="next-link" ng-if="isNextResponse()" href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/responses/{{ nextResponse() }}">Next</a>
+        <span ng-if="!isNextResponse()">Next</span>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <div class="form-info">
+      <h2>Response {{ responseIndex + 1 }} to {{ form.name }}</h2>
+      <ul>
+        <li><span class="form-info-data">Version {{ form.version }}</span><span class="form-info-data" ng-if="form.current"> (current)</span> in <span class="form-info-data">{{ projects[form.project] }}</span></li>
+        <li>By <span class="form-info-data">{{ responses[responseIndex].username }}</span> on <span class="form-info-data">{{ responses[responseIndex].date | date:"medium" }}</span></li>
+      </ul>
+    </div>
+
+    <form action="" class="form-preview">
+      <div class="row field {{ field.kind}}-field" ng-repeat="field in form.fields">
+        <div class="small-12 columns" ng-include="field.kind + '-field.html'"></div>
+      </div>
+    </form>
+  </div>
+</div>
+

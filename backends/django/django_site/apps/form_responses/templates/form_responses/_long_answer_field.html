@@ -1,0 +1,21 @@
+{% load form_responses_tags %}
+
+{% if field.details.question %}
+<div class="question">{{ field.details.question|markdown }}</div>
+{% endif %}
+
+<label{% if response.errors %} class="error"{% endif %}>
+  {{ field.details.label }}
+  <textarea name="responses[{{ field.id }}][answer]">{{ response.details.answer }}</textarea>
+</label>
+{% if errors %}
+  <small class="error">
+    <ul>
+    {% for name, msgs in errors.message_dict.items %}
+    {% for msg in msgs %}
+    <li>{{ name|add:' '|add:msg|capfirst }}</li>
+    {% endfor %}
+    {% endfor %}
+    </ul>
+  </small>
+{% endif %}

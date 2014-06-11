@@ -1,0 +1,21 @@
+<% if field.details[:question] %>
+<div class="question"><%= md2html(field.details[:question]) %></div>
+<% end %>
+
+<ul class="choices<% if response.errors.any? %> error<% end %>">
+  <% field.details[:choices].each_with_index do |choice, i| %>
+  <li class="choice">
+      <input type="hidden" name="responses[<%= field.id %>][answers][][label]" value="<%= choice[:label] %>">
+      <label><input type="checkbox" name="responses[<%= field.id %>][answers][][selected]" value="1"<% if !response.details[:answers].nil? && response.details[:answers][i][:selected] %> checked<% end %>> <%= choice[:label] %></label>
+  </li>
+  <% end %>
+</ul>
+<% if response.errors.any? %>
+  <small class="error">
+    <ul>
+    <% response.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </small>
+<% end %>

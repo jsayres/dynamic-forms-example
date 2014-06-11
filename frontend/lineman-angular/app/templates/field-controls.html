@@ -1,0 +1,6 @@
+<a class="move-field-up" ng-if="editingFieldIndex > 0" ng-click="moveFieldUp(editingFieldIndex)"><i class="fi-arrow-up"></i></a>
+<span class="move-field-up-disabled" ng-if="editingFieldIndex == 0"><i class="fi-arrow-up"></i></span>
+<a class="move-field-down" ng-if="editingFieldIndex < form.fields.length - 1" ng-click="moveFieldDown(editingFieldIndex)"><i class="fi-arrow-down"></i></a>
+<span class="move-field-down-disabled" ng-if="editingFieldIndex == form.fields.length - 1"><i class="fi-arrow-down"></i></span>
+<a class="remove-field" ng-click="removeField(editingFieldIndex)"><i class="fi-x"></i></a>
+

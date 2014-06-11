@@ -1,0 +1,16 @@
+{
+  "name": "admin",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "jquery": ">= 2.1.0",
+    "foundation": "^5.1.1",
+    "foundation-icon-fonts": "*",
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-sanitize": "~1.2",
+    "angular-cookies": "~1.2",
+    "pagedown": "~1.1.0"
+  }
+}

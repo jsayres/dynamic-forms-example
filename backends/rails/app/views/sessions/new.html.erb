@@ -1,0 +1,29 @@
+<h1>Log In</h1>
+
+<div class="row">
+  <div class="large-6 columns last">
+    <%= form_tag login_path do %>
+
+    <div>
+      <%= label_tag :username %>
+      <%= text_field_tag :username, params[:username] %>
+    </div>
+
+    <div>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
+
+    <% if params[:next] %>
+    <div>
+      <%= hidden_field_tag :next, params[:next] %>
+    </div>
+    <% end %>
+
+    <div>
+      <%= submit_tag "Log In", id: "login", class: "button" %>
+    </div>
+
+    <% end %>
+  </div>
+</div>

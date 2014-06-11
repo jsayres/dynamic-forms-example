@@ -1,0 +1,3 @@
+<div class="question" ng-if="field.details.question" ng-bind-html="md2html(field.details.question)"></div>
+<label>{{ field.details.label }}</label>
+<input type="text" disabled value="{{ field.response ? field.response.answer : '' }}">

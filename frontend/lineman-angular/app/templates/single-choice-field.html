@@ -1,0 +1,7 @@
+<div class="question" ng-if="field.details.question" ng-bind-html="md2html(field.details.question)"></div>
+<ul class="choices">
+  <li class="choice" ng-repeat="choice in field.details.choices" ng-init="val = field.response && field.response.answer">
+    <input type="radio" ng-value="choice.label" ng-model="val" ng-change="val = field.response && field.response.answer">
+    <label>{{ choice.label }}</label>
+  </li>
+</ul>

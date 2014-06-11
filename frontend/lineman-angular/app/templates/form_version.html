@@ -1,0 +1,54 @@
+<div id="admin-form-version" class="admin-page-content" class="row">
+
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">View Form</h4>
+
+      <li class="heading">Navigation</li>
+      <li><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/responses">Responses to This Form</a></li>
+      <li><a href="/admin/forms">Forms Home</a></li>
+
+      <div ng-if="form">
+        <li class="heading">Actions</li>
+        <li ng-if="!form.published"><a ng-click="publish()">Publish</a></li>
+        <li ng-if="form.published"><a ng-click="unpublish()">Unpublish</a></li>
+        <li ng-if="!form.locked"><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/edit">Edit</a></li>
+        <li><a href="/admin/forms/{{ form.number }}/versions/{{ form.version}}/new-version">Copy to New Version</a></li>
+        <li><a href="/admin/forms/{{ form.number }}/versions/{{ form.version}}/new-form">Copy to New Form</a></li>
+        <li><a href="/admin/forms/new">Create a New Form</a></li>
+      </div>
+
+      <li class="heading">Versions</li>
+      <li id="version-navigation" class="inline-links">
+        <a class="prev-link" ng-if="isPrevVersion()" href="/admin/forms/{{ form.number }}/versions/{{ prevVersion() }}">Previous</a>
+        <span ng-if="!isPrevVersion()">Previous</span>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="versions-link" href="/admin/forms/{{ form.number }}/versions">All</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="next-link" ng-if="isNextVersion()" href="/admin/forms/{{ form.number }}/versions/{{ nextVersion() }}">Next</a>
+        <span ng-if="!isNextVersion()">Next</span>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <div class="form-info">
+      <h2 ng-bind="versionsLoaded ? form.name : '&nbsp;'"></h2>
+      <ul>
+        <li><span class="form-info-data">Version {{ form.version }}</span><span class="form-info-data" ng-if="form.current"> (current)</span> in <span class="form-info-data">{{ projects[form.project] }}</span>, last saved on <span class="form-info-data">{{ form.date | date:"medium" }}</span> by <span class="form-info-data">{{ form.username }}</span></li>
+        <li class="form-unpublished" ng-if="!form.published"><i class="fi-x"></i> Unpublished</li>
+        <li class="form-published" ng-if="form.published"><i class="fi-check"></i> Published <span class="published-url">Location: <a target="_blank" href="/forms/{{ form.project }}/{{ form.slug }}">{{ protocol() }}://{{ host() }}{{ port() != '80' ? ':' + port() : '' }}/forms/{{ form.project }}/{{ form.slug }}</a></span></li>
+        <li class="form-locked" ng-if="form.locked"><i class="fi-lock"></i> Locked</li>
+      </ul>
+    </div>
+
+    <form action="" class="form-preview">
+      <div class="row field {{ field.kind }}-field" ng-repeat="field in form.fields">
+        <div class="small-12 columns" ng-include="field.kind + '-field.html'"></div>
+      </div>
+    </form>
+  </div>
+</div>
+

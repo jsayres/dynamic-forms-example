@@ -1,0 +1,51 @@
+<div id="admin-forms" class="admin-page-content">
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">Forms Home</h4>
+      <li class="heading">Navigation</li>
+      <li><a href="/admin">Admin Home</a></li>
+      
+      <li class="heading">Actions</li>
+      <li><a href="/admin/forms/new">Create a New Form</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <h2>Current Forms</h2>
+
+    <div ng-if="formsLoaded">
+
+      <p id="no-forms-notice" ng-if="!anyForms">There are no forms yet.</p>
+
+      <table id="form-list" ng-if="anyForms">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Author</th>
+            <th>Last Modified</th>
+            <th>Current<br>Version<br>Published?</th>
+            <th>Previous<br>Version<br>Published?</th>
+            <th>Responses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="form in forms">
+            <td><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}">{{ form.name }}</a></td>
+            <td>{{ projects[form.project] }}</td>
+            <td>{{ form.username }}</td>
+            <td>{{ form.date | date:"medium" }}</td>
+            <td class="check"><i class="fi-check published-check" ng-if="form.published"></i></td>
+            <td class="check"><i class="fi-check prev-published-check" ng-if="form.prevPublished"></i></td>
+            <td>
+              <span ng-if="form.numResponses == 0">{{ form.numResponses }}</span>
+              <a class="form-responses" href="/admin/forms/{{ form.number }}/versions/{{ form.version}}/responses" ng-if="form.numResponses > 0">{{ form.numResponses }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

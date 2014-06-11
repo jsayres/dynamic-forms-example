@@ -1,0 +1,43 @@
+<div id="admin-form-responses" class="admin-page-content">
+
+  <div class="sidebar">
+    <ul class="side-nav">
+      <h4 class="title">Form Responses</h4>
+      <li class="heading">Navigation</li>
+      <li ng-if="form"><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}">Form View &amp; Options</a></li>
+      <li ng-if="form"><a href="/admin/forms">Forms Home</a></li>
+
+      <li class="heading">Actions</li>
+      <li><a target="_self" href="/api/forms/{{ form.number }}/versions/{{ form.version }}/responses.csv">Download CSV</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div ng-if="responsesLoaded">
+
+      <h2>Responses to {{ form.name }}</h2>
+
+      <p id="no-responses-notice" ng-if="responses.length == 0">There are no responses to this form yet.</p>
+      <table id="form-responses-list" ng-if="responses.length > 0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Date</th>
+            <th ng-repeat="field in nonInfoFields(form.fields)" ng-include="field.kind + '-response-header.html'"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="response in responses">
+            <td><a href="/admin/forms/{{ form.number }}/versions/{{ form.version }}/responses/{{ $index + 1 }}">{{ $index + 1 }}</a></td>
+            <td>{{ response.username }}</td>
+            <td>{{ response.date | date:'short' }}</td>
+            <td ng-repeat="fieldResponse in response.fieldResponses" ng-include="nonInfoFields(form.fields)[$index].kind + '-response-cell.html'"></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Sub-Project{% endblock %}</title>
+
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/sub.css">
+    {% block css %}{% endblock %}
+  </head>
+
+  <body>
+
+    <div class="top-bar contain-to-grid">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="/subproject">My Website | Sub-Project</a></h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <ul class="right">
+            <li><a href="/">My Website Home</a></li>
+            {% if user.is_authenticated %}
+              {% if user.is_staff or user.is_superuser %}
+              <li class="divider"></li>
+              <li><a href="{% url 'admin' %}">Admin</a></li>
+              {% endif %}
+            {% endif %}
+            <li class="divider"></li>
+            <li>
+              {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}">Log Out</a>
+              {% else %}
+              <a href="{% url 'login' %}">Log In</a>
+              {% endif %}
+            </li>
+          </ul>
+        </section>
+ 
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.tags != 'success' or message != 'DONE' %}
+            <div class="alert-box {{ message.tags }}">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+      </div>
+    </div>
+
+  </body>
+</html>
+
+

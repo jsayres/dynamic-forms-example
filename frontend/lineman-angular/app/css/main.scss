@@ -1,0 +1,128 @@
+@mixin flexbox($direction) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: $direction;
+  -moz-flex-flow: $direction;
+  -ms-flex-flow: $direction;
+  flex-flow: $direction;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@import "foundation-settings";
+@import "foundation";
+@import "foundation-icons";
+@import "forms";
+
+$top-bar-height: 45px;
+$side-nav-width: 240px;
+$sidebar-width: $side-nav-width + 40px;
+$content-width: 800px;
+$total-width: $sidebar-width + $content-width;
+
+body {
+  @include flexbox(column);
+  div.top-bar {
+    z-index: 10;
+    @include flex(0 0 $top-bar-height);
+    nav.top-bar {
+      @include flexbox(row);
+      ul.title-area {
+        @include flex(1 0 $sidebar-width);
+        @include flexbox(row);
+        justify-content: flex-end;
+        li.name {
+          @include flex(0 0 $sidebar-width);
+        }
+      }
+      .top-bar-section:first-of-type {
+        @include flex(1 1 $content-width);
+      }
+    }
+  }
+}
+
+#view {
+  @include flex(1 1 auto);
+  @include flexbox(row);
+}
+
+.sidebar {
+  @include flex(1 0 $sidebar-width);
+  @include flexbox(row);
+  justify-content: flex-end;
+  padding: rem-calc(10) rem-calc(20) rem-calc(10);
+  background-color: #f0f7fc;
+  overflow-y: auto;
+  .side-nav {
+    @include flex(1 0 $side-nav-width);
+    max-width: $side-nav-width;
+    li {
+      margin-bottom: rem-calc(1);
+    }
+    .heading {
+      margin-top: rem-calc(20);
+      text-transform: uppercase;
+      color: #444;
+    }
+    a:not(.button), a {
+      padding: 0;
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+  .button {
+    color: #fff;
+  }
+  li.inline-links {
+    a {
+      display: inline;
+    }
+  }
+}
+
+.content {
+  @include flex(1 1 $content-width);
+  @include flexbox(column);
+  padding: rem-calc(20) rem-calc(20);
+  overflow-y: auto;
+}
+
+.admin-page-content {
+  @include flex(1 1 auto);
+  @include flexbox(row);
+}
+
+#login-form {
+  padding-top: rem-calc(50);
+  text-align: center;
+}
+
+#admin-home {
+  #apps-list {
+    margin: rem-calc(30) 0;
+  }
+}
+
+h1 {
+  /* margin-top: 1.2rem; */
+}
+

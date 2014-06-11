@@ -1,0 +1,18 @@
+<% if field.details[:question] %>
+<div class="question"><%= md2html(field.details[:question]) %></div>
+<% end %>
+
+<ul class="choices <% if response.errors.any? %> error<% end %>">
+  <% field.details[:choices].each do |choice| %>
+  <li class="choice"><label><input type="radio" name="responses[<%= field.id %>][answer]" value="<%= choice[:label] %>"<% if response.details[:answer] == choice[:label] %> checked<% end %>> <%= choice[:label] %></label></li>
+  <% end %>
+</ul>
+<% if response.errors.any? %>
+  <small class="error">
+    <ul>
+    <% response.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </small>
+<% end %>

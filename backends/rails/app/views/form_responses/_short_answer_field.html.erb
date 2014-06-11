@@ -1,0 +1,16 @@
+<% if field.details[:question] %>
+<div class="question"><%= md2html(field.details[:question]) %></div>
+<% end %>
+
+<label<% if response.errors.any? %> class="error"<% end %>><%= field.details[:label] %>
+  <input type="text" name="responses[<%= field.id %>][answer]" value="<%= response.details[:answer] %>">
+</label>
+<% if response.errors.any? %>
+  <small class="error">
+    <ul>
+    <% response.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </small>
+<% end %>

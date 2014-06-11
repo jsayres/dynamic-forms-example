@@ -1,0 +1,77 @@
+{% load form_responses_tags %}
+
+{% if not field.details.question %}
+<div class="question">{{ field.details.question|markdown }}</div>
+{% endif %}
+
+<label{% if 'addressLine1' in errors.message_dict %} class="error"{% endif %}>Address Line 1
+  <input type="text" name="responses[{{ field.id }}][addressLine1]" value="{{ response.addressLine1 }}">
+</label>
+{% if 'addressLine1' in errors.message_dict %}
+  <small class="addressLine1 error">
+    <ul>
+    {% for msg in errors.message_dict.addressLine1 %}
+    <li>{{ 'Address Line 1'|add:' '|add:msg|capfirst }}</li>
+    {% endfor %}
+    </ul>
+  </small>
+{% endif %}
+
+<label{% if 'addressLine2' in errors.message_dict %} class="error"{% endif %}>Address Line 2
+  <input type="text" name="responses[{{ field.id }}][addressLine2]" value="{{ response.addressLine2 }}">
+</label>
+{% if 'addressLine2' in errors.message_dict %}
+  <small class="addressLine2 error">
+    <ul>
+    {% for  msg in errors.message_dict.addressLine2 %}
+    <li>{{ name|add:' '|add:msg|capfirst }}</li>
+    {% endfor %}
+    </ul>
+  </small>
+{% endif %}
+
+<div class="row city-state-zip">
+  <div class="small-6 columns">
+    <label{% if 'city' in errors.message_dict %} class="error"{% endif %}>City
+    <input type="text" name="responses[{{ field.id }}][city]" value="{{ response.city }}">
+    </label>
+    {% if 'city' in errors.message_dict %}
+      <small class="city error">
+        <ul>
+        {% for msg in errors.message_dict.city %}
+        <li>{{ 'City'|add:' '|add:msg|capfirst }}</li>
+        {% endfor %}
+        </ul>
+      </small>
+    {% endif %}
+  </div>
+  <div class="small-3 columns">
+    <label{% if 'state' in errors.message_dict %} class="error"{% endif %}>State
+      <input type="text" name="responses[{{ field.id }}][state]" value="{{ response.state }}">
+    </label>
+    {% if 'state' in errors.message_dict %}
+      <small class="state error">
+        <ul>
+        {% for msg in errors.message_dict.state %}
+        <li>{{ 'State'|add:' '|add:msg|capfirst }}</li>
+        {% endfor %}
+        </ul>
+      </small>
+    {% endif %}
+  </div>
+  <div class="small-3 columns">
+    <label{% if 'zip' in errors.message_dict %} class="error"{% endif %}>ZIP
+      <input type="text" name="responses[{{ field.id }}][zip]" value="{{ response.zip }}">
+    </label>
+    {% if 'zip' in errors.message_dict %}
+      <small class="zip error">
+        <ul>
+        {% for msg in errors.message_dict.zip %}
+        <li>{{ 'Zip'|add:' '|add:msg|capfirst }}</li>
+        {% endfor %}
+        </ul>
+      </small>
+    {% endif %}
+  </div>
+</div>
+

@@ -1,0 +1,24 @@
+{
+  "name": "admin",
+  "title": "Admin Angular App",
+  "version": "0.0.1",
+  "private": true,
+  "author": {
+    "name": "Jason Sayres",
+    "company": "Center for Innovation in Engineering and Science Education"
+  },
+  "devDependencies": {
+    "protractor": ">=0.20.1",
+    "lineman-angular": ">= 0.2.0",
+    "coffee-script": "~1.7.1",
+    "lineman-bower": "0.0.3",
+    "jasmine-given": "^2.6.0",
+    "jasmine-only": "^0.1.0",
+    "request-json": "^0.4.8"
+  },
+  "scripts": {
+    "start": "lineman run",
+    "test": "lineman spec-ci",
+    "ptor": "node_modules/protractor/bin/protractor"
+  }
+}
